@@ -1,0 +1,135 @@
+
+// Form
+
+input[role=combobox],
+input[type='email'],
+input[type='number'],
+input[type='password'],
+input[type='search'],
+input[type='tel'],
+input[type='text'],
+input[type='url'],
+input[type='file'],
+textarea,
+select
+  // appearance: none // Removes awkward default styles on some inputs for iOS
+  background-color: transparent
+  border: .1rem solid color-quaternary
+  // border-radius: .4rem
+  box-shadow: none
+  box-sizing: inherit // Forced to replace inherit values of the normalize.css
+  height: 2rem
+  padding: 0 .5rem // The .6rem vertically centers text on FF, ignored by Webkit
+  width: 100%
+
+  &:focus
+    border-color: color-primary
+    outline: 0
+
+/* select
+  background: url('/assets/static/dropdown.svg') center right no-repeat
+  padding-right: 2rem
+
+  &:focus
+    background-image: url('/assets/static/dropdown-focus.svg')
+*/
+
+textarea
+  min-height: 6.5rem
+  resize: none
+
+label,
+legend
+  display: block
+  align-items: baseline
+  font-size: 1.2rem
+  font-weight: 700
+
+fieldset
+  border-width: 0
+  padding: 0
+
+input[type='checkbox'],
+input[type='radio']
+  display: inline
+
+.label-inline
+  // font-weight: normal
+  // display: inline-block
+  input
+    margin-right: .5rem
+
+input[role=combobox]
+  margin-bottom: 0 !important;
+
+input[role=combobox] + div
+  height:150px;
+  overflow-y:scroll;
+
+  > div
+    padding: 5px;
+
+.select {
+  width: 100%;
+}
+
+select {
+  //  color: transparent;
+    text-shadow: 0 0 0 #000;
+
+    // T1461 : line-height is increased from inherited 1.5 to 2.5 to avoid marathi text cutting
+    // Developer : Pallavi
+    // Date : 14/07/2018
+    line-height: 2.5;
+}
+
+.select select {
+  outline: none !important;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  display: block;
+  padding-right: 2.5em;
+  position: relative;
+  background: color-initial;
+  border: none;
+}
+
+.select::after {
+  border: 2px solid color-logo-blue;
+  border-top-width: 2px;
+  border-right-width: 2px;
+  border-top-style: solid;
+  border-right-style: solid;
+  border-top-color: rgb(33, 150, 243);
+  border-right-color: rgb(33, 150, 243);
+  border-right: 0;
+  border-top: 0;
+  content: " ";
+  display: block;
+  height: .5em;
+  pointer-events: none;
+  position: absolute;
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  width: .5em;
+  margin-top: -.375em;
+  right: 1.125em;
+  top: 50%;
+  //z-index: 4;
+}
+
+.search-box {
+  position: relative;
+}
+
+.search-box .icon-search {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  font-size: 18px;
+  color: color-logo-blue;
+}
+
+.active-option {
+  color: color-logo-blue;
+}

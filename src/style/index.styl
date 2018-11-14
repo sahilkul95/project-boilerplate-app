@@ -1,0 +1,409 @@
+@import "normalize"
+@import "minicss"
+@import "header"
+@import "login"
+@import "modal"
+
+::-webkit-scrollbar
+  //width: 8px;
+
+::-webkit-scrollbar-track
+  //box-shadow: inset 0 0 5px grey;
+  border-radius: 5px;
+
+body
+  overflow-y: auto
+  overflow-x: hidden
+
+html, body
+  height 100%
+  width 100%
+  padding 0
+  margin 0
+  background-color #f1f1f1
+  -webkit-font-smoothing antialiased
+  -moz-osx-font-smoothing grayscale
+  //overflow-y auto
+  font-family: 'Roboto', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif !important
+
+.box
+  box-shadow 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)
+  background white
+  padding 0.5rem 1.5em !important
+  margin 0 0 0.5rem 0
+  margin-bottom 0 !important
+  border-bottom 1px solid #656565
+
+#loader
+  position: absolute;
+  left: 66%;
+  top: 66%;
+  z-index: 1;
+  //width: 150px;
+  //height: 150px;
+  margin: -75px 0 0 -75px;
+  border: 12px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 12px solid color-primary;
+  width: 50px;
+  height: 50px;
+  -webkit-animation: spin 1s linear infinite;
+  animation: spin 1s linear infinite;
+
+#loader-bg
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0,0,0,.3);
+  z-index: 2;
+  display: none;
+
+.no-padding
+  padding: 0!important;
+
+.no-padding-left
+  padding-left: 0!important;
+
+.tile
+  cursor: pointer
+  &.fix-width
+    width: 200px
+
+.tile:hover
+  background-color: #e2e2e2 !important
+
+.tile.active
+  border-bottom: 6px solid color-logo-blue
+  background-color: #e2e2e2 !important
+
+.select {
+  position: relative;
+  display: inline-block;
+}
+
+.header-color-blue
+  color: color-logo-blue !important
+
+h6.header-color-blue
+  display: inline
+  padding: 8px !important
+
+.selected-option
+  color: color-logo-blue !important
+  font-size: 1.2em !important
+
+.selected-option option {
+  color: color-secondary !important;
+  font-size: 0.7em !important;
+}
+
+
+.pagination
+  margin-top: 0.5em;
+  span
+   padding-right: 0.5em;
+
+.border-top-color-blue
+  border-top: 1px solid color-logo-blue;
+  box-shadow:inherit !important;
+
+.hyperlink
+  color: #15c!important;
+  cursor: pointer;
+  &:hover
+   color: #000!important;
+
+.tab-menu .fix-width
+  padding: 0.5em 0;
+.tab-block .span-margin
+  margin-left: 0.5rem;
+  margin-top: 0
+
+.billwise-finding-issue
+ color: color-danger
+
+.billwise-finding-no-isssue
+  color: color-success
+
+.vertical-tiles
+  width: 135px;
+  height: 115px;
+  border: 1px solid color-logo-blue;
+  margin: 1.5rem 1rem;
+  border-radius: 5px;
+  padding-top: 0.5rem;
+  cursor: pointer
+  p
+    height: 55px
+  h3
+    color: color-primary
+  &:hover
+    box-shadow: 2px 3px 8px -1px #808080
+    transition: box-shadow 0.3s ease-in-out
+
+.vertical-tiles-non-clickable
+  width: 135px;
+  height: 115px;
+  border: 1px solid grey;
+  margin: 1.5rem 1rem;
+  border-radius: 5px;
+  padding-top: 0.5rem;
+  color: grey
+  p
+    height: 55px
+    color: grey
+  h3
+    color: grey
+
+.vertical-tiles-clicked
+  width: 135px;
+  height: 115px;
+  border: 1px solid;
+  margin: 1.5rem 1rem;
+  border-radius: 5px;
+  padding-top: 0.5rem;
+  cursor: pointer;
+  box-shadow: 2px 3px 8px -1px #808080;
+  transition: box-shadow 0.3s ease-in-out;
+  color: #f7941d;
+  background-color:#f7941d;
+  p
+    height: 55px;
+  h5
+    color: color-primary;
+
+.billform-creation-bottom-buttons
+  background-color: color-initial;
+  padding: 0.5em 1.5em;
+  border-bottom: 1px solid color-primary;
+  p
+    display: inline;
+    float: right;
+    margin-right: 0.5rem;
+    margin-top: 0.5rem;
+
+.border-right-lightgray
+  border-right: 1px solid lightgray;
+
+.table-head
+  border-bottom: none;
+  p:last-child
+    margin-left: 11.4em;
+
+.table-left
+  box-shadow: none;
+  border-bottom: none;
+  padding: 0.5rem 2.5rem!important;
+  table
+    tbody tr.hidden-tr
+      visibility: hidden;
+
+.middle-block
+  width: 10%;
+  background-color: color-initial;
+  padding-top: 0.5em;
+  button
+    width: 100px;
+  button:last-child
+    margin-top: 0.5em;
+
+.table-right
+  box-shadow: none;
+  border-bottom: none;
+  padding: .5rem 2rem !important;
+  table
+    tbody tr.hidden-tr
+      visibility: hidden;
+
+.modal.previewModalStyling
+  .modal-content
+    margin: 1% auto;
+    section.modal-body
+      height: 90vh;
+      overflow: hidden;
+      #printableArea
+        height: 75vh;
+        overflow-y: auto;
+        margin: 1em 0;
+
+.main-navigation
+  height: 3.5em;
+  .main-navigation-row
+    height: 100%
+    .main-navigation-block
+        background: #f1f1f1;
+        padding-top: 6px;
+        padding-left: 28px;
+        .main-navigation-select
+          width: auto;
+          background: #f1f1f1;
+          height: 3rem;
+.newly-added-rows
+  background-color: #e1e1e1
+
+.terms-conditions
+  border: 1px solid #333;
+  padding: 10px;
+  background: #f2f2f2;
+  box-shadow: inset 0 0 7px #808080;
+  border-radius: 2px;
+
+.payment-tabs
+  ul li
+    width: 50% !important;
+    a
+      cursor: default;
+      span
+        display: inline-block;
+        margin: 0 10px;
+        padding: 0 7px;
+        background-color: #333;
+        color: #fff;
+        border-radius: 50%;
+
+.bbpou-logo
+  width: 130px;
+
+.bbps-logo
+  width: 100px;
+
+.receipt-tab
+  border: 1px dashed grey;
+  //background-color: #e0f4fc;
+  .border-bottom
+    border-bottom:1px dashed grey;
+  &:first-child {
+    background-color: #a1d0e1;
+  }
+  &:last-child {
+    //background-color: #e0f4fc;
+  }
+
+.receipt-params-labels
+  border-right: 1px dashed grey;
+  padding: 10px;
+  h6
+    font-weight: normal;
+    font-size: 1.2em;
+    //color: #148ab5;
+
+.receipt-params-values
+  padding: 10px;
+  h6
+    font-weight: normal;
+    font-size: 1.2em;
+
+@-webkit-keyframes spin
+  0%
+    -webkit-transform: rotate(0deg);
+  100%
+    -webkit-transform: rotate(360deg);
+
+@keyframes spin
+  0%
+    transform: rotate(0deg);
+  100%
+    transform: rotate(360deg);
+
+.active
+  color: color-primary
+
+.button-margin-left
+  margin-left: 0.2rem
+  margin-bottom: 0.2rem
+
+.dashboard-consumer-tile {
+  .box {
+    margin: 0 20px 10px !important;
+    padding: 10px !important;
+    border-radius: 8px;
+    box-shadow: none;
+    border: 1px solid #808080;
+    .row {
+      div:first-child {
+        border-right: 1px solid #e1e1e1;
+        span {
+          font-weight: bold;
+          color: #f7941d;
+          font-size: 1.1em;
+        }
+      }
+      div:nth-child(2) {
+        padding: 3px 0;
+        h6 {
+          font-size: 2em;
+          color: #656565;
+        }
+      }
+    }
+  }
+}
+
+.dashboard-label {
+  margin: 10px 0 10px;
+  background-color: #656565;
+  padding: 0 20px;
+  label {
+    font-size: 1.1rem;
+    color: #fff;
+  }
+}
+
+.dashboard-task-tile {
+  .box:first-child, .box:nth-child(3) {
+    margin: 0 0 10px 20px !important;
+    padding: 10px !important;
+    border-radius: 8px;
+    box-shadow: none;
+    border: 1px solid #808080;
+  }
+  .box:nth-child(2) {
+    margin: 0 20px 10px 0 !important;
+    padding: 10px !important;
+    border-radius: 8px;
+    box-shadow: none;
+    border: 1px solid #808080;
+  }
+  .row {
+    div span {
+      font-weight: bold;
+      color: #f7941d;
+      font-size: 1.1em;
+    }
+    div h6 {
+      font-size: 2em;
+      color: #656565;
+    }
+  }
+}
+
+.pointer
+  cursor: pointer
+
+.slide-wrapper {
+  position: relative;
+  overflow: hidden;
+  width: auto;
+}
+
+.slide {
+  position: absolute;
+  right: -600px;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  transition: 1s;
+  visibility: hidden;
+  top:0
+}
+
+.slide-wrapper:hover .slide {
+  transition: 1s;
+  right: 0;
+  top: 0;
+  visibility: visible;
+}

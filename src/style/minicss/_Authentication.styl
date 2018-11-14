@@ -1,0 +1,79 @@
+.auth-section
+  position fixed
+  height 100vh
+  left 0
+  right 0
+  background-color #bcbcbc
+  background-size cover
+  background-repeat no-repeat
+  sup
+     top -6em
+     font-size 60%
+     color #004756
+  ::placeholder {
+    color: transparent;
+    opacity: 1; /* Firefox */
+  }
+
+  > .auth-center
+      margin 0 auto !important
+      max-width 35rem !important
+
+    .auth-form
+      padding 2em 2em 0 2em !important
+
+  body
+    font-family: Avenir Next, Avenir, SegoeUI, sans-serif;
+
+  form
+    margin: 2em 0;
+
+  .field
+    display: flex;
+    flex-flow: column-reverse;
+    margin-bottom: 1em;
+
+  label, input
+    transition: all 0.2s;
+    touch-action: manipulation;
+    font-size: 1em;
+
+  input
+    font-size: 1em;
+    border: 0;
+    border-bottom: 1px solid #ccc;
+    font-family: inherit;
+    -webkit-appearance: none;
+    border-radius: 0;
+    padding: 0;
+    cursor: text;
+
+  input:focus
+    outline: 0;
+    border-bottom: 1px solid #666;
+
+  label
+    letter-spacing: 0.05em;
+    color: color-primary
+
+  input:placeholder-shown + label
+    font-size: 1em;
+    cursor: text;
+    max-width: 66.66%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transform-origin: left bottom;
+    transform: translate(0, 2.125rem) scale(1.5);
+
+  ::-webkit-input-placeholder
+    opacity: 0;
+    transition: inherit;
+
+  input:focus::-webkit-input-placeholder
+    opacity: 1;
+
+  input:not(:placeholder-shown) + label,
+  input:focus + label
+    transform: translate(0, 0) scale(1);
+    cursor: pointer;

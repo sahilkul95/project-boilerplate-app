@@ -1,0 +1,164 @@
+
+// Button
+
+
+.button,
+button,
+input[type='button'],
+input[type='reset'],
+input[type='submit']
+  background-color color-primary
+  border .1rem solid color-primary
+  color color-initial
+  cursor pointer
+  display inline-block
+  font-size 1rem
+  height 2.5rem
+  letter-spacing .1rem
+  line-height 2.5rem
+  padding 0 0.5rem
+  text-align center
+  text-decoration none
+  //text-transform uppercase
+  white-space nowrap
+  position relative
+  overflow hidden
+  transition box-shadow .28s cubic-bezier(.4,0,.2,1),background-color .3s ease
+  box-shadow 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12)
+  + button
+    margin-left 0.2rem
+    margin-top 0.2rem
+  &:before
+    content ""
+    display block
+    position absolute
+    width 100%
+    height 100%
+    top 0
+    left 0
+    pointer-events none
+    background-image radial-gradient(circle,#000 10%,transparent 10.01%)
+    background-repeat no-repeat
+    background-position 50%
+    transform scale(10)
+    opacity 0
+    transition transform .5s,opacity 1s
+  &:focus
+    outline: 0
+  &.is-loading
+    color transparent !important
+    pointer-events none
+
+    &:after
+      animation a .75s infinite linear
+      border .2rem solid #dbdbdb
+      border-radius 50%
+      border-right-color transparent
+      border-top-color transparent
+      content ""
+      height 1rem
+      width 1em
+      left calc(50% - 0.5em)
+      top calc(50% - 0.5em)
+      position absolute !important
+
+  &:active
+    box-shadow 0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12)
+    &:before
+      transform scale(0)
+      opacity .2
+      transition 0s
+
+  &:hover
+    background-color lighten(color-primary, 30%)
+    border-color lighten(color-primary, 30%)
+    color color-initial
+    outline 0
+
+  &[disabled]
+    cursor default
+    opacity .5
+
+    &:focus,
+    &:hover
+      background-color color-primary
+      border-color color-primary
+
+  &.button-outline
+    background-color transparent
+    color color-primary
+
+  &.button-small
+    height: 1.8rem
+    line-height: 1.8rem
+    background-color color-primary
+    border-color transparent
+    border-radius 3px
+    color color-initial
+    font-size: 0.9rem;
+
+    &:hover
+      background-color transparent
+      border-color color-secondary
+      color color-secondary
+
+    &[disabled]
+
+      &:focus,
+      &:hover
+        border-color inherit
+        color color-primary
+
+  &.button-clear
+    background-color transparent
+    border-color transparent
+    color color-primary
+
+  &.button-rectangle
+    height: 3.5rem
+    border-radius 3px
+
+    &:hover
+      background-color transparent
+      border-color transparent
+      color color-secondary
+
+    &[disabled]
+
+      &:focus
+        background-color transparent
+      &:hover
+        color color-primary
+
+  &.button-fab
+    //position fixed
+    width 50px
+    height 35px
+    bottom 0px
+    right 0px
+    //border-radius 50%
+    float right
+    > img
+      position relative
+      top .2rem
+      width 2rem
+
+  &.is-small
+    font-size 0.75rem
+
+a + button
+  margin-left 0.25rem
+
+.button-margin
+  margin-left: .2rem;
+  margin-top: .2rem;
+
+@keyframes a
+  0% {
+    -webkit-transform rotate(0deg)
+    transform rotate(0deg)
+  }
+  100% {
+    -webkit-transform rotate(359deg)
+    transform rotate(359deg)
+  }

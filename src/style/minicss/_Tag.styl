@@ -1,0 +1,110 @@
+//Tag with delete button
+
+.tag
+  background-color color-primary
+  border-radius 0.5rem
+  color color-tertiary
+  display inline-block
+  height 2rem
+  font-size 1.2rem
+  padding 0 0.75rem
+  white-space nowrap
+  -moz-user-select none
+  margin 0 0.75rem
+  text-transform capitalize !important
+  + .tag
+    margin-left: 0.25rem
+
+.is-danger
+  border 1px solid color-danger
+  background-color color-initial
+  color color-danger
+
+.is-warning
+  border 1px solid color-warning
+  background-color color-initial
+  color color-warning
+
+.is-success
+  border 1px solid color-success
+  background-color color-initial
+  color color-success
+
+.is-small-tag
+  font-size .8rem
+  height: 1.3rem
+  padding: 0 7px
+
+.tag .delete
+  margin-left 0.25em
+  margin-right -0.375em
+
+.tag.is-light
+  background-color whitesmoke
+  color color-secondary
+
+.tag.is-medium
+  font-size 1rem
+
+.tag.is-large
+  font-size 1.25rem
+
+.tag.is-success
+background-color green!important
+color color-initial!important
+
+.tag.is-outlined
+  border 1px solid color-primary
+  background-color color-initial
+  color color-primary
+
+.delete
+  padding .8em
+  user-select none
+  background-color color-tag-delete
+  border none
+  border-radius 290486px
+  cursor pointer
+  display inline-block
+  font-size 1rem
+  height 20px
+  outline none
+  position relative
+  vertical-align top
+  width 20px
+
+.delete:before, .delete:after
+  background-color white
+  content ""
+  display block
+  left 50% !important
+  position absolute
+  top 50% !important
+  transform translateX(-50%) translateY(-50%) rotate(45deg)
+  transform-origin center center
+
+.delete:before
+  height 2px
+  width 50%
+
+.delete:after
+  height 50%
+  width 2px
+
+.delete:hover, .delete:focus
+  background-color shade(color-tag-delete, 20%)
+
+.delete:active
+  background-color shade(color-tag-delete, 30%)
+
+.delete.is-small
+  height 16px
+  width 16px
+
+.delete.is-medium
+  height 24px
+  width 24px
+
+.delete.is-large
+  height 32px
+  width 32px

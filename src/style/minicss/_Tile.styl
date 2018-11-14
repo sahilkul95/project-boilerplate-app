@@ -1,0 +1,104 @@
+@import "../../style/minicss/_Color"
+
+.level
+  align-items: center;
+  justify-content: space-between;
+
+  < code
+      border-radius: 0
+
+  < img
+      display: inline-block;
+      vertical-align: top;
+
+  .level:not(:last-child)
+    margin-bottom: 1.5rem;
+
+.level.is-mobile
+  display: flex;
+
+.level.is-mobile .level-left,
+.level.is-mobile .level-right
+  display: flex;
+
+
+.level.is-mobile .level-left + .level-right
+  margin-top: 0;
+
+.level.is-mobile .level-item:not(:last-child)
+  margin-bottom: 0;
+
+
+.level.is-mobile .level-item:not(.is-narrow)
+  flex-grow: 1;
+
+@media screen and (min-width: 769px), print
+  .level
+    display: flex;
+
+  .level > .level-item:not(.is-narrow)
+    flex-grow: 1;
+
+.level-item
+  background-color: #148ab5;
+  color: #fff;
+  padding: 5px;
+  margin: 10px;
+  border-bottom: 5px solid #faa831;
+  align-items: center;
+  display: flex;
+  flex-basis: auto;
+  flex-grow: 0;
+  flex-shrink: 0;
+  justify-content: center;
+
+.level-item .title, .level-item .subtitle
+  margin-bottom: 0;
+
+@media screen and (max-width: 768px)
+  .level-item:not(:last-child)
+    margin-bottom: 0.75rem;
+
+.level-left, .level-right
+  flex-basis: auto;
+  flex-grow: 0;
+  flex-shrink: 0;
+
+.level-left .level-item.is-flexible, .level-right .level-item.is-flexible
+  flex-grow: 1;
+
+@media screen and (min-width: 769px), print
+  .level-left .level-item:not(:last-child), .level-right .level-item:not(:last-child)
+    margin-right: 0.75rem;
+
+.level-left
+  align-items: center;
+  justify-content: flex-start;
+
+@media screen and (max-width: 768px)
+  .level-left + .level-right
+    margin-top: 1.5rem;
+
+@media screen and (min-width: 769px), print
+  .level-left
+    display: flex;
+
+.level-right
+  align-items: center;
+  justify-content: flex-end;
+
+@media screen and (min-width: 769px), print
+  .level-right
+    display: flex;
+
+.level-heading
+  display: block;
+  font-size: 15px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+
+.level-title
+  font-size: 2rem;
+  margin-top: 5px;
+  font-weight: 400;
+  line-height: 1.125;

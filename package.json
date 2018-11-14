@@ -1,0 +1,49 @@
+{
+  "name": "project-boilerplate-app",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "if-env NODE_ENV=production || if-env NODE_ENV=test && npm run -s serve || npm run -s dev",
+    "build": "npm install && preact build --no-prerender --dest public --clean",
+    "serve": "preact build --no-prerender --dest public --clean && preact serve -p 80",
+    "dev": "preact watch -p 8000",
+    "lint": "eslint src",
+    "test": "jest ./tests"
+  },
+  "eslintConfig": {
+    "extends": "eslint-config-synacor",
+    "rules": {
+      "indent": [
+        "2",
+        "tab",
+        {
+          "SwitchCase": "1"
+        }
+      ]
+    }
+  },
+  "eslintIgnore": [
+    "build/*"
+  ],
+  "devDependencies": {
+    "eslint": "^4.15.0",
+    "eslint-config-synacor": "^2.0.2",
+    "eslint-plugin-react": "^7.5.1",
+    "identity-obj-proxy": "^3.0.0",
+    "if-env": "^1.0.0",
+    "jest": "^21.2.1",
+    "preact-cli": "^2.1.0",
+    "preact-cli-sw-precache": "^1.0.3",
+    "preact-render-spy": "^1.2.1",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.1"
+  },
+  "dependencies": {
+    "browser-image-compression": "0.0.3",
+    "fetch-bb": "^3.0.0",
+    "google-map-react": "^1.0.9",
+    "linkstate": "^1.1.0",
+    "preact": "^8.2.7",
+    "preact-compat": "^3.17.0",
+    "preact-router": "^2.5.7"
+  }
+}

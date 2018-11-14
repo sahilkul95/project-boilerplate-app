@@ -1,0 +1,7 @@
+node_modules
+/build
+/public
+/*.log
+public/bundle*
+public/style*
+package-lock.json

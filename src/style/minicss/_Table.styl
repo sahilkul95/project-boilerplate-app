@@ -1,0 +1,59 @@
+
+// Table
+table
+  border-spacing: 0
+  width: 100%
+
+  th
+    border-top: .1rem solid color-quinary
+
+  td,
+  th
+    border-bottom: .1rem solid color-quinary
+    border-right: .1rem solid color-quinary
+    padding: 0.5rem 0.75rem
+    text-align: left
+
+    &:first-child
+      border-left: 0.1rem solid color-quinary
+
+    &:last-child
+      //padding-right: 0
+
+    a
+      //text-decoration: underline;
+      color: #15c;
+
+tr.left-active td
+  border-bottom: 0.1rem solid color-success
+
+tr.right-active td
+  border-bottom: 0.1rem solid color-danger
+
+tr:last-child td
+  //border-bottom: none !important
+
+table.vert-horiz-border-table, table.vert-horiz-border-table th
+    border: .2rem solid color-quaternary
+    border-collapse: collapse
+    td
+      border-right: .1rem solid color-quinary
+      border-collapse: collapse
+
+.table-border-top
+  border-top: .1rem solid color-quinary
+
+.table-responsive
+  overflow-x: auto
+
+.table-height
+  height: 50vh
+
+.no-border-table
+  td,
+  th
+    border-left: none
+    border-right: none
+
+    &:first-child
+      border-left: none
