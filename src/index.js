@@ -26,7 +26,7 @@ http.requestInterceptor = (httpConfig) => {
   }
   httpConfig.headers.push({
     name: 'Authorization',
-    value: 'Bearer ' + AppStore.get('token').token
+    value: AppStore.get('token').token
   });
   httpConfig.headers.push({
     name: 'Content-Type',
