@@ -55,10 +55,10 @@ export default class App extends Component {
   }
 
   componentWillMount() {
-    this.checkLocationAccess()
-      .then(() => {
-        this.beforeInstallPrompt();
-      });
+    // this.checkLocationAccess()
+    //   .then(() => {
+    //     this.beforeInstallPrompt();
+    //   });
   }
 
   checkAdminConditions(path) {

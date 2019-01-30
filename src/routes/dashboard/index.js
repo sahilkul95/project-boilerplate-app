@@ -119,27 +119,27 @@ export default class Dashboard extends Component {
       underReviewTaskCount: 0,
       rejectedTaskCount: 0,
       consumerCount: 0,
-      userInfo: AppStore.get('userinfo'),
+      // userInfo: AppStore.get('userinfo'),
       loggedUserID: ''
     };
-    this.setState({loggedUserID: this.state.userInfo.id});
+    // this.setState({loggedUserID: this.state.userInfo.id});
   }
 
   componentDidMount() {
-    let promises = [
-      this.getRejectedTaskCount(),
-      this.getUnderReviewTaskCount(),
-      this.getApprovedBillFormTasks(),
-      this.getConsumerCount()
-    ];
-    startLoader();
-    return Promise.all(promises)
-      .then(() => {
-        stopLoader();
-      })
-      .catch((HTTPException) => {
-        console.error(HTTPException);
-      });
+    // let promises = [
+    //   this.getRejectedTaskCount(),
+    //   this.getUnderReviewTaskCount(),
+    //   this.getApprovedBillFormTasks(),
+    //   this.getConsumerCount()
+    // ];
+    // startLoader();
+    // return Promise.all(promises)
+    //   .then(() => {
+    //     stopLoader();
+    //   })
+    //   .catch((HTTPException) => {
+    //     console.error(HTTPException);
+    //   });
   }
 
   render({}, state) {
