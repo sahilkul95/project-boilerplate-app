@@ -1,170 +1,121 @@
 import { h, Component } from 'preact';
-import { Link } from 'preact-router';
-import CONSTANTS from '../../lib/constants';
-import { AppStore } from '../../lib/store';
-import http from 'fetch-bb';
-import { route } from 'preact-router';
-import { Toast } from '../../lib/toastr';
-import { startLoader, stopLoader } from '../../lib/utils';
 
 export default class Header extends Component {
 
-  componentDidMount() {
-    return http.get(`${CONSTANTS.API_URL}/api/user/me`)
-      .then((userinfo) => {
-        if (!userinfo.isVerified) {
-          this.logout();
-        }
-        AppStore.set('userinfo', userinfo);
-        this.setState({
-          brand: userinfo.company.brand,
-          username: userinfo.name,
-          userDisplayName: userinfo.displayName,
-          email: userinfo.email,
-          isClientAdmin: userinfo.isClientAdmin,
-          shortName: userinfo.company.shortName,
-          companyName: userinfo.company.name,
-          isConsumerVerificationStage: userinfo.company.isConsumerVerificationStage
-        });
-        if (userinfo.department && userinfo.department.length) {
-          this.setState({
-            departmentName: userinfo.department[0].name
-          });
-        }
-      })
-      .catch((HTTPException) => {
-        console.error(HTTPException);
-      });
-  }
-
-  toggleMenu() {
-    this.setState({
-      navMenu: !this.state.navMenu
-    });
-  }
-
-  logout() {
-    startLoader();
-    http.post(`${CONSTANTS.API_URL}/api/user/logout`)
-      .then(() => {
-        AppStore.removeAll();
-        stopLoader();
-        location.replace(location.origin);
-        new Toast('Successfully logged out', Toast.TYPE_DONE, Toast.TIME_LONG);
-        route(`/`);
-      })
-      .catch((HTTPException) => {
-        stopLoader();
-        console.error(HTTPException);
-      });
-  }
-
-  openSidebar() {
-    let navToggle = document.querySelector('.nav-toggle');
-    let navClose= document.querySelector('.nav-close');
-    navToggle.classList.toggle('expanded');
-    navClose.classList.toggle('expanded');
-    if (navToggle.classList.contains('expanded')) {
-      document.getElementById("overlay").style.display = "block";
-    } else {
-      document.getElementById("overlay").style.display = "none";
+  openNav() {
+    let sideNavDiv = Array.prototype.slice.call(document.querySelectorAll('.sidenav'), 0);
+    if (sideNavDiv.length > 0) {
+      document.getElementById("mySidenav").classList.toggle('sidenav-width');
+      document.getElementById("mySidenav").classList.toggle('sidenav-hide');
+      document.getElementById("nav--super-vertical").classList.toggle('nav--super-vertical');
+      document.getElementById("nav--super-vertical").classList.toggle('nav--super-vertical-60');
+      document.getElementById("main").classList.toggle('header-hide');
+      document.getElementById("myVerticalSidenav").classList.toggle('gn-open-all');
+      document.getElementById("myVerticalSidenav").classList.toggle('gn-open-part');
+      // document.getElementById("main").classList.toggle('margin-left-200');
+      // document.getElementById("burger-menu").classList.toggle('margin-right-200');
+      document.getElementById("myOverlay").classList.toggle('overlay');
+    }
+    let contentDiv = Array.prototype.slice.call(document.querySelectorAll('.outer-most-div'), 0);
+    if (contentDiv.length > 0) {
+      let $target = document.getElementById('main-body');
+      $target.classList.toggle('margin-left-200');
     }
   }
 
-  menuClick(link) {
-    this.openSidebar();
-    this.setState({
-      route: link
-    });
-    route('/'+link);
-  }
-
   componentWillMount() {
-    this.state = {
-      brand: '',
-      username: '',
-      userDisplayName: '',
-      email:'',
-      isClientAdmin: false,
-      departmentName: '',
-      shortName: '',
-      isConsumerVerificationStage: false,
-      route: 'dashboard'
-    };
+    document.addEventListener('DOMContentLoaded', () => {
 
+      // Get all "navbar-burger" elements
+      let $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+      // Check if there are any navbar burgers
+      if ($navbarBurgers.length > 0) {
+
+        // Add a click event on each of them
+        $navbarBurgers.forEach(($el) => {
+          $el.addEventListener('click', () => {
+
+            // Get the target from the "data-target" attribute
+            let target = $el.dataset.target;
+            let $target = document.getElementById(target);
+
+            // Toggle the class on both the "navbar-burger" and the "navbar-menu"
+            $el.classList.toggle('is-active');
+            $target.classList.toggle('is-active');
+
+          });
+        });
+      }
+
+    });
   }
 
-  render({}, { userDisplayName }) {
+  closeNav(){
+    document.getElementById("myOverlay").classList.toggle('overlay');
+    let $target = document.getElementById('mySidenav');
+    $target.classList.toggle('sidenav-width');
+    $target.classList.toggle('sidenav-hide');
+    let $target1 = document.getElementById('myVerticalSidenav');
+    $target1.classList.toggle('gn-open-part');
+    $target1.classList.toggle('gn-open-all');
+    let $target2 = document.getElementById('nav--super-vertical');
+    $target2.classList.toggle('nav--super-vertical-60');
+    $target2.classList.toggle('nav--super-vertical');
+  }
+
+  componentDidMount() {
+  }
+
+  render({}) {
     return (
-      <div>
-        <nav class="header">
-          <div class="nav-toggle" onClick={this.openSidebar.bind(this)} style="width:20px; height:20px;">
-            <div class="nav-toggle-bar"/>
-          </div>
-          <nav class="nav nav-close">
-            <p style="padding: 0.8rem 5px 0px 4.5rem;font-size: 1.3rem;">
-              <span onClick={this.menuClick.bind(this,'profile')}>{userDisplayName}</span>
-              <em class="icon icon-ios-contact initial is-small" style="font-size: 28px; float: right; height: 35px;"/></p>
-            <hr style="margin-bottom: 0; margin-top: 0.7rem;"/>
-            <ul class="main-ul">
-              <li onClick={this.menuClick.bind(this,'dashboard')} class={this.state.route === 'dashboard' ? 'nav-active' : ''}>Home</li>
-              <li onClick={this.menuClick.bind(this,'consumers')} class={this.state.route === 'consumers' ? 'nav-active' : ''}>Consumers</li>
-              <li>Requests</li>
-              <ul class="sub-menu-ul">
-                <li onClick={this.menuClick.bind(this,'tasks/all/underreview')} style="font-size: 1.15rem; line-height: 1.8rem;"
-                  class={this.state.route === 'tasks/all/underreview' ? 'nav-active' : ''}>Review</li>
-                <li onClick={this.menuClick.bind(this,'tasks/all/rejected')} style="font-size: 1.15rem; line-height: 1.8rem;"
-                  class={this.state.route === 'tasks/all/rejected' ? 'nav-active' : ''}>Rejected</li>
-                <li onClick={this.menuClick.bind(this,'tasks/billForm/accepted')} style="font-size: 1.15rem; line-height: 1.8rem;"
-                  class={this.state.route === 'tasks/billForm/accepted' ? 'nav-active' : ''}>Vouchers</li>
-              </ul>
-              <li onClick={this.logout.bind(this)}>Logout</li>
-            </ul>
-          </nav>
+      <div style="transition:0.3s">
+        <div id="myOverlay" class="overlay" onclick={this.closeNav.bind(this)}/>
+        <div class="hero-head" >
+          <nav class="navbar box" style="padding:0 !important;">
+            <div class="container" id="main">
 
+              <div class="navbar-brand">
+                <span style="font-size:23px;cursor:pointer;padding: 10px 5px 0px 20px;"  onclick={this.openNav.bind(this)}>&#9776;</span>
+                <a class="navbar-item" href="/">
+                  <strong>company Name</strong>
+                </a>
+                <span class="navbar-burger burger" id="burger-menu" data-target="navbarMenuHero1">
+                  <span/>
+                  <span/>
+                  <span/>
+                </span>
+              </div>
+              <div id="navbarMenuHero1" class="navbar-menu">
+                <div class="navbar-end"  style="margin-right:2em;">
+                  <a class="navbar-item is-active" href="/meetings">
+                    nav menu one
+                  </a>
+                  <a class="navbar-item" href="/search">
+                    nav menu two
+                  </a>
 
-          <div class={"menu " + ( this.state.navMenu ? 'active' : '')}>
-            <div style="float:right">
-              <Link href="/dashboard" class="no-padding billwise-logo" style="width: auto;">
-                <img class="billwise-logo" src="/assets/static/PowerDECK Logo_white.svg" height="30" width="130"/>
-              </Link>
+                  <div class="navbar-item has-dropdown is-hoverable">
+                    <div class="navbar-link">
+                      nav subMenu
+                    </div>
+                    <div class="navbar-dropdown is-boxed">
+                      <a class="navbar-item" href="/rejectedRequest/">
+                        nav subMenu one
+                      </a>
+                      <a class="navbar-item" href="/reviewRequest/">
+                        nav subMenu 2
+                      </a>
+                      <a class="navbar-item" href="/publishRequest">
+                        nav subMenu three
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            {
-              // <div clas="menucompname" style="display:inline;">
-              //   <span>
-              //     <input type="checkbox" id="drawer-toggle" name="drawer-toggle"/>
-              //     <label for="drawer-toggle" id="drawer-toggle-label"/>
-              //   </span>
-              //   <nav id="drawer">
-              //     <ul>
-              //       <li><a href="#">Menu Item</a></li>
-              //       <li><a href="#">Menu Item</a></li>
-              //       <li><a href="#">Menu Item</a></li>
-              //       <li><a href="#">Menu Item</a></li>
-              //     </ul>
-              //   </nav>
-              // </div>
-
-            }
-            {
-              // <div class="usermenu">
-              //   <Link class="dropdown" href="#">
-              //     <span class="username-wrap" title={userDisplayName} style="margin-left: 20px; display: inline;">
-              //       <em class="icon icon-ios-contact initial is-small" style="position: absolute; top: 3px; left: 15px;"/>
-              //       {userDisplayName}</span>
-              //     <div class="dropdown-content" >
-              //       <Link href="/profile">Profile</Link>
-              //       <Link href="/verifyOldPassword">Change Password</Link>
-              //       <a onClick={this.logout.bind(this)}>Logout</a>
-              //     </div>
-              //   </Link>
-              //
-              // </div>
-            }
-
-
-          </div>
-        </nav>
+          </nav>
+        </div>
       </div>
     );
   }

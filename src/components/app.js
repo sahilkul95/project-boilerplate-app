@@ -3,6 +3,7 @@ import { Router } from 'preact-router';
 import { Match } from 'preact-router/src/match';
 
 import Header from './header';
+import VerticalNavigation from './verticalNavigation';
 import Login from '../routes/login';
 import UserVerification from '../routes/userVerification';
 import NotFound from '../components/error_pages/not_found';
@@ -72,8 +73,6 @@ export default class App extends Component {
         <div id="loader-bg">
           <div id="loader" />
         </div>
-        <div id="overlay" />
-        <div id="app" class="container">
           <Match path="/">
             {
               ({path}) => {
@@ -82,25 +81,25 @@ export default class App extends Component {
                 // }
                 if (path !== '/setup' && !/\/forgotpassword/.test(path) &&
                  path !== '/resetpassword' && path !== '/verify' && path !== '/setpassword' && path !== '/notFound' && this.checkAdminConditions(path)) {
-                  return (<div><Header/><Footer/></div>);
+                  return (<div><Header/><VerticalNavigation/><Footer/></div>);
                 }
               }
             }
           </Match>
-
-          <Router>
-            <NotFound path ='/notFound' type="404" default/>
-            <Login path="/"/>
-            <UserVerification path="/verify"/>
-            <ForgotPassword path="/forgotpassword"/>
-            <ResetPassword path="/resetpassword"/>
-            <Profile path="/profile" />
-            <VerifyOldPassword path="/verifyOldPassword" />
-            <ChangePassword path="/changePassword" />
-            <SetPassword path="/setpassword" />
-            <Dashboard path="/dashboard" />
-          </Router>
-        </div>
+          <div id="main-body" class="outer-most-div margin-left-200" style="transition: margin-left .5s;">
+            <Router>
+              <NotFound path ='/notFound' type="404" default/>
+              <Login path="/"/>
+              <UserVerification path="/verify"/>
+              <ForgotPassword path="/forgotpassword"/>
+              <ResetPassword path="/resetpassword"/>
+              <Profile path="/profile" />
+              <VerifyOldPassword path="/verifyOldPassword" />
+              <ChangePassword path="/changePassword" />
+              <SetPassword path="/setpassword" />
+              <Dashboard path="/dashboard" />
+            </Router>
+          </div>
       </div>
     );
   }
