@@ -12,14 +12,14 @@ export default class Header extends Component {
       document.getElementById("main").classList.toggle('header-hide');
       document.getElementById("myVerticalSidenav").classList.toggle('gn-open-all');
       document.getElementById("myVerticalSidenav").classList.toggle('gn-open-part');
-      // document.getElementById("main").classList.toggle('margin-left-200');
+      // document.getElementById("main").classList.toggle('margin-left-300');
       // document.getElementById("burger-menu").classList.toggle('margin-right-200');
       document.getElementById("myOverlay").classList.toggle('overlay');
     }
     let contentDiv = Array.prototype.slice.call(document.querySelectorAll('.outer-most-div'), 0);
     if (contentDiv.length > 0) {
       let $target = document.getElementById('main-body');
-      $target.classList.toggle('margin-left-200');
+      $target.classList.toggle('margin-left-300');
     }
   }
 
@@ -57,11 +57,22 @@ export default class Header extends Component {
     $target.classList.toggle('sidenav-width');
     $target.classList.toggle('sidenav-hide');
     let $target1 = document.getElementById('myVerticalSidenav');
-    $target1.classList.toggle('gn-open-part');
-    $target1.classList.toggle('gn-open-all');
     let $target2 = document.getElementById('nav--super-vertical');
-    $target2.classList.toggle('nav--super-vertical-60');
-    $target2.classList.toggle('nav--super-vertical');
+    if ($target1.classList.contains('gn-open-all')) {
+      $target1.classList.add('gn-open-part');
+      $target1.classList.remove('gn-open-all');
+      document.getElementById("main-body").classList.add('margin-left-300');
+    }
+    document.getElementById("main-body").classList.remove('margin-left-300');
+    if ($target2.classList.contains('nav--super-vertical')) {
+      $target2.classList.add('nav--super-vertical-60');
+      $target2.classList.remove('nav--super-vertical');
+    }
+  //   $target1.classList.toggle('gn-open-part');
+  //   $target1.classList.toggle('gn-open-all');
+    // let $target2 = document.getElementById('nav--super-vertical');
+  //   $target2.classList.toggle('nav--super-vertical-60');
+  //   $target2.classList.toggle('nav--super-vertical');
   }
 
   componentDidMount() {
@@ -76,7 +87,7 @@ export default class Header extends Component {
             <div class="container" id="main">
 
               <div class="navbar-brand">
-                <span style="font-size:23px;cursor:pointer;padding: 10px 5px 0px 20px;"  onclick={this.openNav.bind(this)}>&#9776;</span>
+                <span style="font-size:23px;cursor:pointer;padding: 13px 5px 0px 20px;"  onclick={this.openNav.bind(this)}>&#9776;</span>
                 <a class="navbar-item" href="/">
                   <strong>company Name</strong>
                 </a>

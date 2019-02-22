@@ -73,33 +73,33 @@ export default class App extends Component {
         <div id="loader-bg">
           <div id="loader" />
         </div>
-          <Match path="/">
-            {
-              ({path}) => {
-                // if ((/\/admin\/([a-zA-Z])*/.test(path) || path === '/admin') && path !== '/admin/login' && this.checkAdminConditions(path)) {
-                //   return (<AdminHeader/>);
-                // }
-                if (path !== '/setup' && !/\/forgotpassword/.test(path) &&
-                 path !== '/resetpassword' && path !== '/verify' && path !== '/setpassword' && path !== '/notFound' && this.checkAdminConditions(path)) {
-                  return (<div><Header/><VerticalNavigation/><Footer/></div>);
-                }
+        <Match path="/">
+          {
+            ({path}) => {
+              // if ((/\/admin\/([a-zA-Z])*/.test(path) || path === '/admin') && path !== '/admin/login' && this.checkAdminConditions(path)) {
+              //   return (<AdminHeader/>);
+              // }
+              if (path !== '/setup' && !/\/forgotpassword/.test(path) &&
+               path !== '/resetpassword' && path !== '/verify' && path !== '/setpassword' && path !== '/notFound' && this.checkAdminConditions(path)) {
+                return (<div><Header/><VerticalNavigation/><Footer/></div>);
               }
             }
-          </Match>
-          <div id="main-body" class="outer-most-div margin-left-200" style="transition: margin-left .5s;">
-            <Router>
-              <NotFound path ='/notFound' type="404" default/>
-              <Login path="/"/>
-              <UserVerification path="/verify"/>
-              <ForgotPassword path="/forgotpassword"/>
-              <ResetPassword path="/resetpassword"/>
-              <Profile path="/profile" />
-              <VerifyOldPassword path="/verifyOldPassword" />
-              <ChangePassword path="/changePassword" />
-              <SetPassword path="/setpassword" />
-              <Dashboard path="/dashboard" />
-            </Router>
-          </div>
+          }
+        </Match>
+        <div id="main-body" class="outer-most-div" style="transition: margin-left .5s;">
+          <Router>
+            <NotFound path ='/notFound' type="404" default/>
+            <Login path="/"/>
+            <UserVerification path="/verify"/>
+            <ForgotPassword path="/forgotpassword"/>
+            <ResetPassword path="/resetpassword"/>
+            <Profile path="/profile" />
+            <VerifyOldPassword path="/verifyOldPassword" />
+            <ChangePassword path="/changePassword" />
+            <SetPassword path="/setpassword" />
+            <Dashboard path="/dashboard" />
+          </Router>
+        </div>
       </div>
     );
   }

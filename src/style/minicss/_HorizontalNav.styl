@@ -1,6 +1,6 @@
 .navbar {
   background-color: color-initial;
-  min-height: 3.25rem;
+  min-height: 4.25rem;
   position: fixed;
   width: 100%;
   top: 0;
@@ -69,7 +69,7 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  min-height: 3.25rem;
+  min-height: 4.25rem;
   width: 100%;
 }
 
@@ -88,7 +88,7 @@
   display: flex;
   -ms-flex-negative: 0;
   flex-shrink: 0;
-  min-height: 3.25rem;
+  min-height: 4.25rem;
 }
 
 .navbar-tabs {
@@ -101,7 +101,7 @@
 .navbar-burger {
   cursor: pointer;
   display: block;
-  height: 3.25rem;
+  height: 4.25rem;
   position: relative;
   width: 3.25rem;
   margin-left: auto;
@@ -289,6 +289,9 @@ a.navbar-link.is-active {
   }
   .navbar-menu.is-active {
     display: block;
+    .nav--super-vertical-60 {
+      z-index: 0;
+    }
   }
   .navbar-menu, .navbar-menu {
     -webkit-overflow-scrolling: touch;
@@ -316,8 +319,9 @@ a.navbar-link.is-active {
     display: flex;
   }
   .navbar {
-    min-height: 3.25rem;
+    min-height: 4.25rem;
   }
+
   .navbar.is-transparent a.navbar-item:hover, .navbar.is-transparent a.navbar-item.is-active,
   .navbar.is-transparent a.navbar-link:hover,
   .navbar.is-transparent a.navbar-link.is-active {
@@ -467,11 +471,11 @@ a.navbar-link.is-active {
   }
   .navbar > .container .navbar-brand,
   .container > .navbar .navbar-brand {
-    margin-left: -1rem;
+    //margin-left: -1rem;
   }
   .navbar > .container .navbar-menu,
   .container > .navbar .navbar-menu {
-    margin-right: -1rem;
+    //margin-right: -1rem;
   }
   a.navbar-item.is-active,
   a.navbar-link.is-active {
