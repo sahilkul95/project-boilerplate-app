@@ -1,223 +1,107 @@
-label {
-  color: secondary-text;
-}
 
-input[type="checkbox"]:not(.modal-trigger):not(.toggle):not(#alert-check):not([id*="lightbox-"]) {
-  position: relative;
-  cursor: pointer;
-  &:before {
-    content: '';
-    width: 16px;
-    height: 16px;
-    border: solid 2px secondary;
-    border-radius: border-radius-small;
-    background: white;
-    position: absolute;
-  }
-  &:after {
-    content: '✓';
-    color: white;
-    background: secondary;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 16px;
-    height: 16px;
-    border: solid 2px secondary;
-    border-radius: border-radius-small;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.3s cubic;
-    will-change: opacity;
-  }
-  &:checked {
-    &:after {
-      opacity: 1;
-    }
-  }
-  &:focus {
-    outline: none;
-  }
-}
+// Form
 
-input[type="radio"] {
-  position: relative;
-  top: 2px;
-  left: 2px;
-  margin: 0 8px;
-  cursor: pointer;
-    &:before {
-    content: '';
-    background-color: white;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    border: solid 2px secondary;
-    display: inline-block;
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    background-image: radial-gradient(circle, secondary 40%, white 50%);
-    background-size: 0;
-    background-position: 50% 50%;
-    background-repeat: no-repeat;
-    transition: all 0.3s cubic;
-    will-change: background-size;
-    z-index: 2;
-  }
-  &:after {
-    content: '';
-    width: 16px;
-    height: 16px;
-    background: white;
-    border-radius: 50%;
-    position: absolute;
-    transition: all 0.3s cubic;
-  }
-  &:checked {
-    &:before {
-      background-size: 14px 14px;
-    }
-  }
-  &:focus {
-    outline: none;
-  }
-}
+input[role=combobox],
+input[type='email'],
+input[type='number'],
+input[type='password'],
+input[type='search'],
+input[type='tel'],
+input[type='text'],
+input[type='url'],
+input[type='file'],
+textarea,
+select
+  // appearance: none // Removes awkward default styles on some inputs for iOS
+  background-color: transparent
+  border: .1rem solid color-quaternary
+  // border-radius: .4rem
+  box-shadow: none
+  box-sizing: inherit // Forced to replace inherit values of the normalize.css
+  height: 2rem
+  padding: 0 .5rem // The .6rem vertically centers text on FF, ignored by Webkit
+  width: 100%
 
-.field:not(:last-child) {
-  //margin-bottom: 2rem;
-}
+  &:focus
+    border-color: color-primary
+    outline: 0
 
-.field {
-  margin-bottom: 2rem;
-}
+/* select
+  background: url('/assets/static/dropdown.svg') center right no-repeat
+  padding-right: 2rem
 
-.field p {
-  margin-top: 0;
-}
+  &:focus
+    background-image: url('/assets/static/dropdown-focus.svg')
+*/
 
-.label:not(:last-child) {
-  //margin-bottom: .5em;
-}
+textarea
+  min-height: 6.5rem
+  resize: none
 
-.label {
-  color: #363636;
-  display: block;
-  font-size: 1rem;
-  font-weight: 700;
-}
+label,
+legend
+  display: block
+  align-items: baseline
+  font-size: 1.2rem
+  font-weight: 700
 
-.control {
-  font-size: 1rem;
-  position: relative;
-  text-align: left;
-}
+fieldset
+  border-width: 0
+  padding: 0
 
-.input {
-  border: 0;
-  outline: none;
-  padding-left: 0;
-  padding-right: 0;
-  box-shadow: inset 0 -1px 0 #dbdbdb;
-  transition: all 300ms;
-  height: 2.5em;
-  max-width: 100%;
-  -moz-appearance: none;
-  -webkit-appearance: none;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  border-radius: 0;
-  display: -webkit-inline-box;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  font-size: 1rem;
-  -webkit-box-pack: start;
-  -ms-flex-pack: start;
-  justify-content: flex-start;
-  line-height: 1.5;
-  padding: calc(.375em - 1px) calc(.625em - 1px);
-  position: relative;
-  vertical-align: top;
-  background-color: transparent;
-  color: #363636;
-  //box-shadow: inset 0 1px 2px rgba(10,10,10,.1);
+input[type='checkbox'],
+input[type='radio']
+  display: inline
+
+.label-inline
+  // font-weight: normal
+  // display: inline-block
+  input
+    margin-right: .5rem
+
+input[role=combobox]
+  margin-bottom: 0 !important;
+
+input[role=combobox] + div
+  height:150px;
+  overflow-y:scroll;
+
+  > div
+    padding: 5px;
+
+.select {
   width: 100%;
 }
 
-.input:focus {
-  box-shadow: inset 0 -2px 0 #1abc9c;
-  border-color: #1abc9c;
-}
+select {
+  //  color: transparent;
+    text-shadow: 0 0 0 #000;
 
-.select select:focus {
-  box-shadow: inset 0 -2px 0 #1abc9c;
-  border-color: #1abc9c;
-}
-
-.input.is-small {
-  border-radius: 2px;
-  font-size: 0.75rem;
-}
-
-.input.is-medium {
-  font-size: 1.25rem;
-}
-
-.input.is-large {
-  font-size: 1.5rem;
-}
-
-.select:not(.is-multiple) {
-  height: 2.25em;
-}
-
-.select {
-  max-width: 100%;
-  vertical-align: top;
-  display: inline-block;
-  position: relative;
-}
-
-.select select:not([multiple]) {
-  padding-right: 2.5em;
+    // T1461 : line-height is increased from inherited 1.5 to 2.5 to avoid marathi text cutting
+    // Developer : Pallavi
+    // Date : 14/07/2018
+    line-height: 2.5;
 }
 
 .select select {
-  border: 0;
-  border-radius: 0;
-  box-shadow: inset 0 -1px 0 #dbdbdb;
-  transition: all 300ms;
-  height: 2.5em;
-  -moz-appearance: none;
+  outline: none !important;
   -webkit-appearance: none;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  display: -webkit-inline-box;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  font-size: 1rem;
-  -webkit-box-pack: start;
-  -ms-flex-pack: start;
-  justify-content: flex-start;
-  line-height: 1.5;
-  padding: calc(.375em - 1px) calc(.625em - 1px);
-  position: relative;
-  vertical-align: top;
-  background-color: transparent;
-  color: #363636;
-  cursor: pointer;
+  -moz-appearance: none;
   display: block;
-  font-size: 1em;
-  max-width: 100%;
-  outline: 0;
+  padding-right: 2.5em;
+  position: relative;
+  background: color-initial;
+  border: none;
 }
 
-.select:not(.is-multiple)::after {
-  border: 1px solid #1abc9c;
+.select::after {
+  border: 2px solid color-logo-blue;
+  border-top-width: 2px;
+  border-right-width: 2px;
+  border-top-style: solid;
+  border-right-style: solid;
+  border-top-color: rgb(33, 150, 243);
+  border-right-color: rgb(33, 150, 243);
   border-right: 0;
   border-top: 0;
   content: " ";
@@ -227,28 +111,25 @@ input[type="radio"] {
   position: absolute;
   -webkit-transform: rotate(-45deg);
   transform: rotate(-45deg);
-  -webkit-transform-origin: center;
-  transform-origin: center;
   width: .5em;
   margin-top: -.375em;
   right: 1.125em;
   top: 50%;
-  z-index: 4;
+  //z-index: 4;
 }
 
-.select.is-small {
-  border-radius: 2px;
-  font-size: 0.75rem;
+.search-box {
+  position: relative;
 }
 
-.select.is-medium {
-  font-size: 1.25rem;
+.search-box .icon-search {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  font-size: 18px;
+  color: color-logo-blue;
 }
 
-.select.is-large {
-  font-size: 1.5rem;
-}
-
-textarea {
-  height: 5em !important;
+.active-option {
+  color: color-logo-blue;
 }
