@@ -3,6 +3,7 @@ import { Router } from 'preact-router';
 import { Match } from 'preact-router/src/match';
 
 import Header from './header';
+import VerticalNavigation from './verticalNavigation';
 import Login from '../routes/login';
 import UserVerification from '../routes/userVerification';
 import NotFound from '../components/error_pages/not_found';
@@ -55,10 +56,10 @@ export default class App extends Component {
   }
 
   componentWillMount() {
-    this.checkLocationAccess()
-      .then(() => {
-        this.beforeInstallPrompt();
-      });
+    // this.checkLocationAccess()
+    //   .then(() => {
+    //     this.beforeInstallPrompt();
+    //   });
   }
 
   checkAdminConditions(path) {
@@ -72,22 +73,20 @@ export default class App extends Component {
         <div id="loader-bg">
           <div id="loader" />
         </div>
-        <div id="overlay" />
-        <div id="app" class="container">
-          <Match path="/">
-            {
-              ({path}) => {
-                // if ((/\/admin\/([a-zA-Z])*/.test(path) || path === '/admin') && path !== '/admin/login' && this.checkAdminConditions(path)) {
-                //   return (<AdminHeader/>);
-                // }
-                if (path !== '/setup' && !/\/forgotpassword/.test(path) &&
-                 path !== '/resetpassword' && path !== '/verify' && path !== '/setpassword' && path !== '/notFound' && this.checkAdminConditions(path)) {
-                  return (<div><Header/><Footer/></div>);
-                }
+        <Match path="/">
+          {
+            ({path}) => {
+              // if ((/\/admin\/([a-zA-Z])*/.test(path) || path === '/admin') && path !== '/admin/login' && this.checkAdminConditions(path)) {
+              //   return (<AdminHeader/>);
+              // }
+              if (path !== '/setup' && !/\/forgotpassword/.test(path) &&
+               path !== '/resetpassword' && path !== '/verify' && path !== '/setpassword' && path !== '/notFound' && this.checkAdminConditions(path)) {
+                return (<div><Header/><VerticalNavigation/><Footer/></div>);
               }
             }
-          </Match>
-
+          }
+        </Match>
+        <div id="main-body" class="outer-most-div" style="transition: margin-left .5s;">
           <Router>
             <NotFound path ='/notFound' type="404" default/>
             <Login path="/"/>

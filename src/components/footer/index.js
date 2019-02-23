@@ -1,23 +1,16 @@
 import { h, Component } from 'preact';
-import { AppStore } from '../../lib/store';
+// import { AppStore } from '../../lib/store';
 
 export default class Footer extends Component {
 
   componentWillMount() {
-    this.state = {
-      companyName: ''
-    };
-    if (AppStore.get('userinfo').company) {
-      this.setState({companyName: AppStore.get('userinfo').company.name});
-    }
   }
 
-  render({}, {companyName}) {
+  render({}) {
     return (
       <div>
         <section class="body-footer">
-          <span>Powered By <span> Selenite </span></span>
-          <span style="float:left"> <span>{companyName}</span></span>
+          <p class="no-margin-vertical">Powered By <strong>*******</strong></p>
         </section>
       </div>
     );

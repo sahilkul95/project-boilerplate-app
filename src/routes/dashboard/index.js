@@ -1,215 +1,323 @@
 import { h, Component } from 'preact';
-import { AppStore } from '../../lib/store';
-import CONSTANTS from '../../lib/constants';
-import { route } from 'preact-router';
-import { startLoader, stopLoader } from '../../lib/utils';
-import http from 'fetch-bb';
-import { Toast } from '../../lib/toastr';
 
 export default class Dashboard extends Component {
-
-  redirect(link) {
-    route('/'+link);
-  }
-
-  searchConsumer(e) {
-    e.preventDefault();
-    let url= '';
-    return http.get(`${CONSTANTS.API_URL}/api/consumer`, {consumerNumber: e.target.consumerNumber.value})
-      .then((consumers) => {
-        if (!consumers.length) {
-          return new Toast('No consumers found.', Toast.TYPE_ERROR, Toast.TIME_NORMAL);
-        }
-        url = '/consumers?consumerNumber=' + e.target.consumerNumber.value;
-        route(url);
-      })
-      .catch((HTTPException) => {
-        new Toast(HTTPException.message, Toast.TYPE_ERROR, Toast.TIME_NORMAL);
-        console.error(HTTPException);
-      });
-  }
-
-  getUnderReviewTaskCount() {
-    let params = {
-      taskObject: '',
-      status: 'underreview',
-      assignedUserID: this.state.loggedUserID
-    };
-
-    if (this.state.departmentFlag) {
-      params.taskObject = 'paymentVoucher';
-    } else {
-      params.taskObject = 'all';
-    }
-
-    return http.get(`${CONSTANTS.API_URL}/api/task/count`, params)
-      .then((response) => {
-        // this.state.totalTabCount.requestedActionsTabCount += response.count;
-        this.setState({
-          underReviewTaskCount : response.count
-        });
-      });
-  }
-
-  getRejectedTaskCount() {
-    let params = {
-      taskObject: '',
-      status: 'rejected',
-      assignedUserID: this.state.loggedUserID
-    };
-
-    if (this.state.departmentFlag) {
-      params.taskObject = 'paymentVoucher';
-    } else {
-      params.taskObject = 'all';
-    }
-
-    return http.get(`${CONSTANTS.API_URL}/api/task/count`, params)
-      .then((response) => {
-        // this.state.totalTabCount.requestedActionsTabCount += response.count;
-        this.setState({
-          rejectedTaskCount : response.count
-        });
-      });
-  }
-
-  getApprovedBillFormTasks() {
-    let params = {
-      taskObject: 'billForm',
-      status: 'accepted'
-    };
-    return http.get(`${CONSTANTS.API_URL}/api/task/count`, params)
-      .then((response) => {
-        if (this.state.userInfo.company.metadata.approvedBillformVisibilityMode === 'owndepartment' && response.count > 0) {
-          this.setState({isOwnDepartment: true});
-        }
-        if (this.state.userInfo.company.metadata.approvedBillformVisibilityMode === 'otherdepartment' && response.count > 0) {
-          this.state.userInfo.department.filter((value) => {
-            if (value._id === this.state.userInfo.company.metadata.nextDepartmentAfterBillformTaskApproval) {
-              this.setState({departmentFlag: true});
-            }
-          });
-        }
-        // if (this.state.departmentFlag || this.state.isOwnDepartment) {
-        //   this.state.totalTabCount.requestedActionsTabCount += response.count;
-        // }
-        this.setState({
-          approvedBillformTasksCount : response.count
-        });
-      });
-  }
-
-  getConsumerCount() {
-    let params = {
-      status: 'verified'
-    };
-    return http.get(`${CONSTANTS.API_URL}/api/consumer/count`, params)
-      .then((response) => {
-        // this.state.totalTabCount.requestedActionsTabCount += response.count;
-        this.setState({
-          consumerCount : response.count
-        });
-      });
-  }
-
-  componentWillMount() {
-    this.state = {
-      consumerNumber: '',
-      approvedBillformTasksCount: 0,
-      underReviewTaskCount: 0,
-      rejectedTaskCount: 0,
-      consumerCount: 0,
-      userInfo: AppStore.get('userinfo'),
-      loggedUserID: ''
-    };
-    this.setState({loggedUserID: this.state.userInfo.id});
-  }
-
-  componentDidMount() {
-    let promises = [
-      this.getRejectedTaskCount(),
-      this.getUnderReviewTaskCount(),
-      this.getApprovedBillFormTasks(),
-      this.getConsumerCount()
-    ];
-    startLoader();
-    return Promise.all(promises)
-      .then(() => {
-        stopLoader();
-      })
-      .catch((HTTPException) => {
-        console.error(HTTPException);
-      });
-  }
-
-  render({}, state) {
+  render ({}, {}) {
     return (
       <div>
-        <div class="box" style="margin-bottom:20px !important">
-          <form name="searchConsumerForm" class="row" onSubmit={this.searchConsumer.bind(this)}>
-            <div class="search-box col-xs-12 col-sm-12 col-md-12 col-lg-12 no-padding">
-              <em class="icon icon-search" />
-              <input type="text" placeholder="Enter Consumer No." name="consumerNumber" value={state.consumerNumber || ''}/>
+        <section>
+          <h6>Dashboard</h6>
+          <div class="row">
+            <div class="col-xs-12 table-responsive">
+              <table>
+                <thead>
+                  <tr>
+                    <td>head one</td>
+                    <td>head one</td>
+                    <td>head one column 3</td>
+                    <td>head four column four</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>head one</td>
+                    <td>head one</td>
+                    <td>head one column 3</td>
+                    <td>head four column four</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
-          </form>
-        </div>
-        <div class="row dashboard-consumer-tile">
-          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+          </div>
+          <div class="">
+            <h2>Responsive layout</h2>
+
+            <h3>Responsive layout</h3>
+            <div class="row">
+              <div class="col-xs-12 col-sm-8 col-md-6 col-lg-4">
+                <div class="box">Box 1</div>
+              </div>
+              <div class="col-xs-12 col-sm-8 col-md-6 col-lg-4">
+                <div class="box">Box 2</div>
+              </div>
+              <div class="col-xs-12 col-sm-8 col-md-6 col-lg-4">
+                <div class="box">Box 3</div>
+              </div>
+            </div>
+
+            <h3>Box offset</h3>
+            <div class="row">
+              <div class="col-xs-12 col-sm-8 col-md-6 col-lg-4 col-lg-offset-3">
+                <div class="box">Box with offset</div>
+              </div>
+            </div>
+
+            <h3>Auto Width</h3>
+            <div class="row">
+              <div class="col-xs">
+                <div class="box">Box auto width</div>
+              </div>
+              <div class="col-xs">
+                <div class="box">Box auto width</div>
+              </div>
+              <div class="col-xs">
+                <div class="box">Box auto width</div>
+              </div>
+              <div class="col-xs">
+                <div class="box">Box auto width</div>
+              </div>
+              <div class="col-xs">
+                <div class="box">Box auto width</div>
+              </div>
+            </div>
+
+            <h2>Typography</h2>
             <div class="box">
               <div class="row">
-                <div class="col-xs-6 col-sm-12 col-md-12 col-lg-12 has-text-center">
-                  <span>{state.userInfo.company.shortName.toUpperCase()} MSEDCL<br/>Consumers</span>
-                </div>
-                <div class="col-xs-6 col-sm-12 col-md-12 col-lg-12 has-text-center">
-                  <h6 class="pointer" onClick={this.redirect.bind(this, 'consumers')}>{state.consumerCount}</h6>
+                <div class="col-xs-12">
+                  <div class="web-typo">
+                    <h1 class="title">
+                      <span class="web-note">Header 1 </span>The life at my company </h1>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-        <div class="row dashboard-label">
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 has-text-center">
-            <label>Requests</label>
-          </div>
-        </div>
-        <div class="row dashboard-task-tile">
-          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3">
-            <div class="box">
               <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 has-text-center">
-                  <span>Review</span>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 has-text-center">
-                  <h6 class="pointer" onClick={this.redirect.bind(this, 'tasks/all/underreview')}>{state.underReviewTaskCount}</h6>
+                <div class="col-xs-12">
+                  <div class="web-typo">
+                    <h2 class="title">
+                      <span class="web-note">Header 2 </span>The life at my company </h2>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3">
-            <div class="box" style="margin: 0 20px 10px 0 !important;">
               <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 has-text-center">
-                  <span>Rejected</span>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 has-text-center">
-                  <h6 class="pointer" onClick={this.redirect.bind(this, 'tasks/all/rejected')}>{state.rejectedTaskCount}</h6>
+                <div class="col-xs-12">
+                  <div class="web-typo">
+                    <h3 class="title">
+                      <span class="web-note">Header 3 </span>The life at my company </h3>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3">
-            <div class="box">
               <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 has-text-center">
-                  <span>Vouchers</span>
+                <div class="col-xs-12">
+                  <div class="web-typo">
+                    <h4 class="title">
+                      <span class="web-note">Header 4 </span>The life at my company </h4>
+                  </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 has-text-center">
-                  <h6 class="pointer" onClick={this.redirect.bind(this, 'tasks/billForm/accepted')}>{state.approvedBillformTasksCount}</h6>
+              </div>
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="web-typo">
+                    <h5 class="title">
+                      <span class="web-note">Header 5 </span>The life at my company </h5>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="web-typo">
+                    <h6 class="title">
+                      <span class="web-note">Header 6 </span>The life at my company </h6>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="web-typo">
+                    <p><span class="web-note">Paragraph</span>
+                        I will be the leader of a company that ends up being worth billions of dollars, because I got the answers.
+                         I understand culture. I am the nucleus. I think thats a responsibility that I have,
+                         to push possibilities, to show people, this is the level that things could be at.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="web-typo">
+                    <span class="web-note">Muted Text</span>
+                    <p class="text-muted">
+                        I will be the leader of a company that ends up being worth billions of dollars, because I got the answers...
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="web-typo">
+                    <span class="web-note">Primary Text</span>
+                    <p class="text-primary">
+                        I will be the leader of a company that ends up being worth billions of dollars, because I got the answers...
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="web-typo">
+                    <span class="web-note">Info Text</span>
+                    <p class="text-info">
+                        I will be the leader of a company that ends up being worth billions of dollars, because I got the answers...
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="web-typo">
+                    <span class="web-note">Success Text</span>
+                    <p class="text-success">
+                        I will be the leader of a company that ends up being worth billions of dollars, because I got the answers...
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="web-typo">
+                    <span class="web-note">Warning Text</span>
+                    <p class="text-warning">
+                        I will be the leader of a company that ends up being worth billions of dollars, because I got the answers...
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="web-typo">
+                    <span class="web-note">Danger Text</span>
+                    <p class="text-danger">
+                        I will be the leader of a company that ends up being worth billions of dollars, because I got the answers...
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
+
+            <div class="row">
+              <div class="col-xs-12">
+                <div class="box">
+                  <div class="title">
+                    <h3>Buttons</h3>
+                    <br/>
+                    <p>Pick your style</p>
+                    <div class="row">
+                      <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-lg-offset-2">
+                        <button class="button">Default</button>
+                        <button class=" button-round">Round</button>
+                        <button class=" button is-small">Small</button>
+                        <button class="button-fab">
+                          <i class="material-icons">Fix</i>
+                        </button>
+                        <button class="button-clear">Clear</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="title">
+                    <p>
+                        Pick your size
+                    </p>
+                  </div>
+                  <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-lg-offset-2">
+                      <button class="button is-small">Small</button>
+                      <button class="button">Regular</button>
+                      <button class="button is-large">Large</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-12">
+                <div class="box">
+                  <div class="title">
+                    <h3>Forms</h3>
+                    <div class="row">
+                      <div class="col-xs-12 col-sm-8 col-md-6 col-lg-4">
+                        <div class="field">
+                          <label class="label">Name</label>
+                          <p class="control">
+                            <input class="input" placeholder="Text input" type="text"/>
+                          </p>
+                        </div>
+                      </div>
+                      <div class="col-xs-12 col-sm-8 col-md-6 col-lg-4 input-container">
+                        <label>
+                          <input type="text" placeholder="Text input" name="product_name"/>
+                          <span>Text input</span>
+                        </label>
+                      </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                      <div class="col-xs-12 col-sm-8 col-md-6 col-lg-4">
+                        <div class="title">
+                          <h6>Checkboxes</h6>
+                        </div>
+                        <div class="form-check">
+                          <input type="checkbox" value=""/> Unchecked
+                        </div>
+                        <div class="form-check">
+                          <input type="checkbox" value="" checked/> Checked
+                        </div>
+                        <div class="form-check">
+                          <input type="checkbox" value="" disabled/> Disabled Unchecked
+                        </div>
+                        <div class="form-check">
+                          <input type="checkbox" value="" disabled checked/> Disabled Checked
+                        </div>
+                      </div>
+                      <div class="col-xs-12 col-sm-8 col-md-6 col-lg-4">
+                        <div class="title">
+                          <h6>Radio Buttons</h6>
+                        </div>
+                        <div class="form-check">
+                          <input type="radio" id="test1" name="exampleRadios" value="option1"/>
+                          <label for="test1">Radio is off</label>
+                        </div>
+                        <div class="form-check">
+                          <input type="radio" id="test2" name="exampleRadios" value="option2" checked/>
+                          <label for="test2">Radio is on</label>
+                        </div>
+                        <div class="form-check disabled">
+                          <input type="radio" id="test3" name="exampleRadios1" value="option1" disabled/>
+                          <label for="test3">Disabled radio is off</label>
+                        </div>
+                        <div class="form-check disabled">
+                          <input type="radio" id="test4" name="exampleRadio1" value="option2" checked disabled/>
+                          <label for="test4">Disabled radio is on</label>
+                        </div>
+                      </div>
+                      <div class="col-xs-12 col-sm-8 col-md-6 col-lg-4">
+                        <div class="title">
+                          <h6>Toggle Buttons</h6>
+                        </div>
+                        <div>
+                          <label class="switch">
+                            <input type="checkbox"/>
+                            <span class="slider round"/>
+                          </label>
+                        </div>
+                        <div>
+                          <label class="switch">
+                            <input type="checkbox" checked/>
+                            <span class="slider round"/>
+                          </label>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+
           </div>
-        </div>
+        </section>
+
       </div>
     );
   }

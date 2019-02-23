@@ -5,7 +5,7 @@
     "start": "if-env NODE_ENV=production || if-env NODE_ENV=test && npm run -s serve || npm run -s dev",
     "build": "npm install && preact build --no-prerender --dest public --clean",
     "serve": "preact build --no-prerender --dest public --clean && preact serve -p 80",
-    "dev": "preact watch -p 8000",
+    "dev": "preact watch -p 8001",
     "lint": "eslint src",
     "test": "jest ./tests"
   },
