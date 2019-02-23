@@ -31,6 +31,12 @@ export default class VerticalNavigation extends Component {
                   <input placeholder="Search" class="gn-search" type="search"/></a>
               </li>
               <li>
+                <a href="/dashboard"> <em class="icon icon-ios-contact" style="padding: 0 35px 0 10px; font-size: 1.5rem;"/>Home</a>
+              </li>
+              <li>
+                <a href="/mobileListView"> <em class="icon icon-ios-contact" style="padding: 0 35px 0 10px; font-size: 1.5rem;"/>List View</a>
+              </li>
+              <li>
                 <a> <em class="icon icon-ios-contact" style="padding: 0 35px 0 10px; font-size: 1.5rem;"/>Downloads</a>
                 <ul class="gn-submenu" style="list-style:none;">
                   <li><a class="gn-icon gn-icon-illustrator">Vector Illustrations</a></li>

@@ -81,7 +81,7 @@ export default class Header extends Component {
   render({}) {
     return (
       <div style="transition:0.3s">
-        <div id="myOverlay" class="overlay" onclick={this.closeNav.bind(this)}/>
+        <div id="myOverlay" class="" onclick={this.closeNav.bind(this)}/>
         <div class="hero-head" >
           <nav class="navbar box" style="padding:0 !important;">
             <div class="container" id="main">
@@ -91,37 +91,36 @@ export default class Header extends Component {
                 <a class="navbar-item" href="/">
                   <strong>company Name</strong>
                 </a>
-                <span class="navbar-burger burger" id="burger-menu" data-target="navbarMenuHero1">
-                  <span/>
-                  <span/>
-                  <span/>
+                <span class="navbar-burger" id="burger-menu" data-target="navbarMenuHero1" style="position: absolute; right: 20px; top: 20px;">
+                  <em class="icon icon-search"/>
                 </span>
               </div>
               <div id="navbarMenuHero1" class="navbar-menu">
                 <div class="navbar-end"  style="margin-right:2em;">
-                  <a class="navbar-item is-active" href="/meetings">
-                    nav menu one
-                  </a>
-                  <a class="navbar-item" href="/search">
-                    nav menu two
-                  </a>
-
-                  <div class="navbar-item has-dropdown is-hoverable">
-                    <div class="navbar-link">
-                      nav subMenu
-                    </div>
-                    <div class="navbar-dropdown is-boxed">
-                      <a class="navbar-item" href="/rejectedRequest/">
-                        nav subMenu one
-                      </a>
-                      <a class="navbar-item" href="/reviewRequest/">
-                        nav subMenu 2
-                      </a>
-                      <a class="navbar-item" href="/publishRequest">
-                        nav subMenu three
-                      </a>
-                    </div>
+                  <div class="searchcontainer navbar-item">
+                    <input type="text" placeholder="Search..."/>
                   </div>
+
+                  {
+                    // <div class="navbar-item has-dropdown is-hoverable">
+                    //   <div class="navbar-link">
+                    //     nav subMenu
+                    //   </div>
+                    //   <div class="navbar-dropdown is-boxed">
+                    //     <a class="navbar-item" href="/rejectedRequest/">
+                    //       nav subMenu one
+                    //     </a>
+                    //     <a class="navbar-item" href="/reviewRequest/">
+                    //       nav subMenu 2
+                    //     </a>
+                    //     <a class="navbar-item" href="/publishRequest">
+                    //       nav subMenu three
+                    //     </a>
+                    //   </div>
+                    // </div>
+                  }
+
+
                 </div>
               </div>
             </div>

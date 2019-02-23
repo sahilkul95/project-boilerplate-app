@@ -15,6 +15,7 @@ import ChangePassword from '../routes/changePassword';
 import SetPassword from '../routes/setpassword';
 import Footer from './footer';
 import Dashboard from '../routes/dashboard';
+import MobileList from '../routes/mobileList';
 import { Toast } from '../lib/toastr';
 
 export default class App extends Component {
@@ -98,6 +99,7 @@ export default class App extends Component {
             <ChangePassword path="/changePassword" />
             <SetPassword path="/setpassword" />
             <Dashboard path="/dashboard" />
+            <MobileList path="/mobileListView" />
           </Router>
         </div>
       </div>
