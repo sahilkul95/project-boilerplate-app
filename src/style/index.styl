@@ -296,6 +296,15 @@ section
   transform: translate(-50%, -50%);
 }
 
+.visibilityForMobile {
+  visibility: hidden;
+  display: none;
+}
+.visibilityForDesktop {
+  visibility: visible;
+  display: block;
+}
+
 @-webkit-keyframes spin
   0%
     -webkit-transform: rotate(0deg);
@@ -341,10 +350,19 @@ section
   .overlay {
     //display: block;
   }
+  .visibilityForMobile {
+    visibility: visible;
+    display: block;
+  }
+  .visibilityForDesktop {
+    visibility: hidden;
+    display: none;
+  }
 }
 
 @media screen and (max-width: media-med) {
   .outer-most-div {
     margin-left: 0px !important;
   }
+
 }
