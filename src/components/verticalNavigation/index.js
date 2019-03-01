@@ -9,6 +9,26 @@ export default class VerticalNavigation extends Component {
   // hoverOff (){
   //   this.setState({ hover: false });
   // }
+
+  sidebarMenuClick() {
+    document.getElementById("myOverlay").classList.toggle('overlay');
+    let $target = document.getElementById('mySidenav');
+    $target.classList.toggle('sidenav-width');
+    $target.classList.toggle('sidenav-hide');
+    let $target1 = document.getElementById('myVerticalSidenav');
+    let $target2 = document.getElementById('nav--super-vertical');
+    if ($target1.classList.contains('gn-open-all')) {
+      $target1.classList.add('gn-open-part');
+      $target1.classList.remove('gn-open-all');
+      document.getElementById("main-body").classList.add('margin-left-300');
+    }
+    document.getElementById("main-body").classList.remove('margin-left-300');
+    if ($target2.classList.contains('nav--super-vertical')) {
+      $target2.classList.add('nav--super-vertical-60');
+      $target2.classList.remove('nav--super-vertical');
+    }
+  }
+
   componentWillMount() {
     this.setState({
       hover: false
@@ -30,11 +50,17 @@ export default class VerticalNavigation extends Component {
                 <a><em class="icon icon-search" style="padding: 0 16px 0 10px; font-size: 1.5rem;"/>
                   <input placeholder="Search" class="gn-search" type="search"/></a>
               </li>
-              <li>
+              <li onClick={this.sidebarMenuClick.bind(this,'home')}>
                 <a href="/dashboard"> <em class="icon icon-ios-contact" style="padding: 0 35px 0 10px; font-size: 1.5rem;"/>Home</a>
               </li>
-              <li>
+              <li onClick={this.sidebarMenuClick.bind(this,'home')}>
                 <a href="/mobileListView"> <em class="icon icon-ios-contact" style="padding: 0 35px 0 10px; font-size: 1.5rem;"/>List View</a>
+              </li>
+              <li onClick={this.sidebarMenuClick.bind(this,'home')}>
+                <a href="/mobileListView"> <em class="icon icon-ios-contact" style="padding: 0 35px 0 10px; font-size: 1.5rem;"/>second option</a>
+              </li>
+              <li onClick={this.sidebarMenuClick.bind(this,'home')}>
+                <a href="/mobileListView"> <em class="icon icon-ios-contact" style="padding: 0 35px 0 10px; font-size: 1.5rem;"/>consumer</a>
               </li>
               <li>
                 <a> <em class="icon icon-ios-contact" style="padding: 0 35px 0 10px; font-size: 1.5rem;"/>Downloads</a>
@@ -48,7 +74,7 @@ export default class VerticalNavigation extends Component {
               <div>
                 <div class="col-xs-12 col-sm-12 col-lg-12 no-pad">
                   <input type="checkbox" id="nav-collapsible-2" />
-                  <label for="nav-collapsible-2" style="display:flex; border-bottom:none;">
+                  <label for="nav-collapsible-2" style="display:flex; border-bottom:0.5px solid #e2e2e2; background:#fff;">
                     <div class="row">
                       <div class="col-xs-12" >
                         <em class="icon icon-ios-contact" style="padding: 0 35px 0 10px; font-size: 1.5rem;"/>Setting
