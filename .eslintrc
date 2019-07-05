@@ -11,10 +11,10 @@
   },
   "parserOptions": {
     "sourceType": "module",
+    "ecmaVersion": 2018,
     "ecmaFeatures": {
       "modules": true,
-      "jsx": true,
-      "ecmaVersion": 2017
+      "jsx": true
     }
   },
   "settings": {

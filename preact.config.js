@@ -16,10 +16,17 @@ export default (config, env, helpers) => {
     // filename: 'sw.js'
   };
   let { index } = helpers.getPluginsByName(config, 'UglifyJsPlugin')[0] || 0;
-  // console.log(plugin.options);
   if (index) {
     config.plugins.splice(index, 1);
     // config.plugins.push(new ButternutWebpackPlugin());
   }
+  config.plugins.push(
+    new helpers.webpack.DefinePlugin({
+      'process.env': {
+        API_URL: JSON.stringify(process.env.API_URL),
+        SITEKEYFORCAPTCHA: JSON.stringify(process.env.SITEKEYFORCAPTCHA)
+      }
+    })
+  );
   preactCliSwPrecachePlugin(config, precacheConfig);
 };

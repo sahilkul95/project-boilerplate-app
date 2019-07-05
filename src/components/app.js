@@ -2,19 +2,8 @@ import { h, Component } from 'preact';
 import { Router } from 'preact-router';
 import { Match } from 'preact-router/src/match';
 
-import Header from './header';
-import VerticalNavigation from './verticalNavigation';
 import Login from '../routes/login';
-import UserVerification from '../routes/userVerification';
 import NotFound from '../components/error_pages/not_found';
-import ForgotPassword from '../routes/forgotpassword';
-import ResetPassword from '../routes/resetpassword';
-import Profile from '../routes/profile';
-import VerifyOldPassword from '../routes/verifyOldPassword';
-import ChangePassword from '../routes/changePassword';
-import SetPassword from '../routes/setpassword';
-import Footer from './footer';
-import Dashboard from '../routes/dashboard';
 import { Toast } from '../lib/toastr';
 
 export default class App extends Component {
@@ -79,10 +68,7 @@ export default class App extends Component {
               // if ((/\/admin\/([a-zA-Z])*/.test(path) || path === '/admin') && path !== '/admin/login' && this.checkAdminConditions(path)) {
               //   return (<AdminHeader/>);
               // }
-              if (path !== '/setup' && !/\/forgotpassword/.test(path) &&
-               path !== '/resetpassword' && path !== '/verify' && path !== '/setpassword' && path !== '/notFound' && this.checkAdminConditions(path)) {
-                return (<div><Header/><VerticalNavigation/><Footer/></div>);
-              }
+              console.log(path);
             }
           }
         </Match>
@@ -90,14 +76,6 @@ export default class App extends Component {
           <Router>
             <NotFound path ='/notFound' type="404" default/>
             <Login path="/"/>
-            <UserVerification path="/verify"/>
-            <ForgotPassword path="/forgotpassword"/>
-            <ResetPassword path="/resetpassword"/>
-            <Profile path="/profile" />
-            <VerifyOldPassword path="/verifyOldPassword" />
-            <ChangePassword path="/changePassword" />
-            <SetPassword path="/setpassword" />
-            <Dashboard path="/dashboard" />
           </Router>
         </div>
       </div>
